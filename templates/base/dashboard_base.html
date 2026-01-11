@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rentala - Property Management{% endblock %}</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="dashboard-overlay"></div>
+    
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <div class="sidebar-logo-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="sidebar-logo-text">
+                        <h2>Rentala</h2>
+                        <p>Property Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="nav-section">
+                <div class="nav-title">Main</div>
+                <a href="{% url 'dashboard:index' %}" class="nav-item {% if request.resolver_match.app_name == 'dashboard' %}active{% endif %}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{% url 'properties:index' %}" class="nav-item {% if request.resolver_match.app_name == 'properties' %}active{% endif %}">
+                    <i class="fas fa-building"></i>
+                    <span>Properties</span>
+                    <span class="nav-badge" id="propertiesNavCount">0</span>
+                </a>
+                <a href="{% url 'tenants:index' %}" class="nav-item {% if request.resolver_match.app_name == 'tenants' %}active{% endif %}">
+                    <i class="fas fa-users"></i>
+                    <span>Tenants</span>
+                    <span class="nav-badge">0</span>
+                </a>
+                <a href="{% url 'payments:index' %}" class="nav-item {% if request.resolver_match.app_name == 'payments' %}active{% endif %}">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Payments</span>
+                    <span class="nav-badge">R0</span>
+                </a>
+                <a href="{% url 'maintenance:index' %}" class="nav-item {% if request.resolver_match.app_name == 'maintenance' %}active{% endif %}">
+                    <i class="fas fa-tools"></i>
+                    <span>Maintenance</span>
+                    <span class="nav-badge">0</span>
+                </a>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-title">Analytics</div>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+
+            <nav class="nav-section">
+                <div class="nav-title">Settings</div>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="{% url 'accounts:logout' %}" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="sidebarPropertiesCount">0</span>
+                        <span class="stat-label">Properties</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="sidebarTenantsCount">0</span>
+                        <span class="stat-label">Tenants</span>
+                    </div>
+                </div>
+                <div class="system-status">
+                    <div class="status-indicator online"></div>
+                    <span>System Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="page-title">
+                    <h1>{% block page_title %}Dashboard Overview{% endblock %}</h1>
+                    <p>{% block page_subtitle %}Welcome back, {{ user.get_full_name|default:user.username }}!{% endblock %}</p>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <div class="date-range">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="currentDateRange">Last 30 Days</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <div class="top-profile-tab" id="topProfileTab">
+                        <div class="top-profile-avatar">{{ user.get_full_name|default:user.username|slice:":2"|upper }}</div>
+                        <div class="top-profile-name">{{ user.get_full_name|default:user.username }}</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* Overlay transparency control */
+.background-container {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Adjust 0.4 for more/less transparency */
+        url('/static/images/rentala_web_background.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Make glass panels more transparent */
+.glass-panel, .stat-card, .card, .sidebar {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Reduce dark overlay if needed */
+.dashboard-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.5) 0%,      /* Reduced from 0.7 */
+        rgba(0, 0, 0, 0.3) 50%,     /* Reduced from 0.5 */
+        rgba(0, 0, 0, 0.5) 100%     /* Reduced from 0.7 */
+    );
+}

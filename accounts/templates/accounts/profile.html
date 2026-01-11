@@ -1,0 +1,390 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - Rentala{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-container">
+    <!-- Sidebar same as other pages -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="sidebar-logo-text">
+                    <h2>Rentala</h2>
+                    <p>Property Management</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-title">Main</div>
+            <a href="{% url 'dashboard:index' %}" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{% url 'properties:index' %}" class="nav-item">
+                <i class="fas fa-building"></i>
+                <span>Properties</span>
+            </a>
+            <a href="{% url 'tenants:index' %}" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Tenants</span>
+            </a>
+            <a href="{% url 'payments:index' %}" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Payments</span>
+            </a>
+            <a href="{% url 'maintenance:index' %}" class="nav-item">
+                <i class="fas fa-tools"></i>
+                <span>Maintenance</span>
+            </a>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-title">Settings</div>
+            <a href="#" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="{% url 'accounts:profile' %}" class="nav-item active">
+                <i class="fas fa-user-cog"></i>
+                <span>Profile</span>
+            </a>
+            <a href="{% url 'accounts:logout' %}" class="nav-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="page-title">
+                <h1>My Profile</h1>
+                <p>Manage your account information and settings</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="top-profile-tab" id="topProfileTab">
+                    <div class="top-profile-avatar">{{ user.first_name|first|upper }}{{ user.last_name|first|upper }}</div>
+                    <div class="top-profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="profile-grid">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar-large">
+                        {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                    </div>
+                    <div class="profile-info">
+                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                        <p>{{ user.email }}</p>
+                    </div>
+                </div>
+                
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Account Type</span>
+                        <span class="detail-value">Property Manager</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Member Since</span>
+                        <span class="detail-value">{{ user.date_joined|date:"F d, Y" }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Last Login</span>
+                        <span class="detail-value">{{ user.last_login|date:"F d, Y" }}</span>
+                    </div>
+                </div>
+                
+                <button class="btn-profile-edit">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
+            </div>
+
+            <div class="settings-card">
+                <h3>Account Settings</h3>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <i class="fas fa-bell"></i>
+                        <div class="setting-info">
+                            <h4>Notifications</h4>
+                            <p>Manage your email and push notifications</p>
+                        </div>
+                        <div class="setting-toggle">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="setting-info">
+                            <h4>Security</h4>
+                            <p>Change password and security settings</p>
+                        </div>
+                        <button class="btn-small">Manage</button>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <i class="fas fa-palette"></i>
+                        <div class="setting-info">
+                            <h4>Appearance</h4>
+                            <p>Customize your dashboard theme</p>
+                        </div>
+                        <button class="btn-small">Customize</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<style>
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #4361ee, #4cc9f0);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.profile-info h3 {
+    margin: 0 0 8px 0;
+    color: white;
+    font-size: 24px;
+}
+
+.profile-info p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.profile-details {
+    margin-bottom: 30px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.detail-value {
+    color: white;
+    font-weight: 500;
+}
+
+.btn-profile-edit {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-profile-edit:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.settings-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.settings-card h3 {
+    margin: 0 0 25px 0;
+    color: white;
+    font-size: 20px;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-item i {
+    font-size: 20px;
+    color: #4cc9f0;
+    width: 24px;
+}
+
+.setting-info {
+    flex: 1;
+}
+
+.setting-info h4 {
+    margin: 0 0 6px 0;
+    color: white;
+    font-size: 16px;
+}
+
+.setting-info p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-small:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Switch toggle */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4361ee;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+});
+</script>
+{% endblock %}

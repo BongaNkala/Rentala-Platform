@@ -1,0 +1,426 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Maintenance Management | Rentala{% endblock %}
+
+{% block sidebar %}
+<div class="dashboard-container">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="sidebar-logo-text">
+                    <h2>Rentala</h2>
+                    <p>Property Management</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-title">Main</div>
+            <a href="{% url 'dashboard:index' %}" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{% url 'properties:index' %}" class="nav-item">
+                <i class="fas fa-building"></i>
+                <span>Properties</span>
+                <span class="nav-badge">12</span>
+            </a>
+            <a href="{% url 'tenants:index' %}" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Tenants</span>
+                <span class="nav-badge">48</span>
+            </a>
+            <a href="{% url 'payments:index' %}" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Payments</span>
+            </a>
+            <a href="{% url 'maintenance:index' %}" class="nav-item active">
+                <i class="fas fa-tools"></i>
+                <span>Maintenance</span>
+                <span class="nav-badge">3</span>
+            </a>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-title">Settings</div>
+            <a href="#" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="{% url 'accounts:profile' %}" class="nav-item">
+                <i class="fas fa-user-cog"></i>
+                <span>Profile</span>
+            </a>
+            <a href="{% url 'accounts:logout' %}" class="nav-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="page-title">
+                <h1>Maintenance Management</h1>
+                <p>Track and manage property maintenance requests</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="maintenanceSearch" placeholder="Search maintenance...">
+                </div>
+                
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="top-profile-tab" id="topProfileTab">
+                    <div class="top-profile-avatar">{{ user.first_name|first|upper }}{{ user.last_name|first|upper }}</div>
+                    <div class="top-profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+                </div>
+            </div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-up"></i> 15.3%
+                    </div>
+                </div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Open Requests</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-down"></i> 8.2%
+                    </div>
+                </div>
+                <div class="stat-value">2</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 12.5%
+                    </div>
+                </div>
+                <div class="stat-value">15</div>
+                <div class="stat-label">Completed</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-up"></i> 5.7%
+                    </div>
+                </div>
+                <div class="stat-value">R12,400</div>
+                <div class="stat-label">Total Cost</div>
+            </div>
+        </section>
+
+        <section class="controls-section">
+            <div class="search-box" style="flex: 1; min-width: 300px;">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="advancedSearch" placeholder="Search by property or issue...">
+            </div>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="open">Open</button>
+                <button class="filter-btn" data-filter="progress">In Progress</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <button class="maintenance-btn maintenance-btn-primary" id="addMaintenanceBtn">
+                <i class="fas fa-plus"></i> Add Request
+            </button>
+        </section>
+
+        <section class="maintenance-grid" id="maintenanceContainer">
+            <div class="maintenance-list">
+                <div class="maintenance-item priority-high">
+                    <div class="maintenance-header">
+                        <div class="maintenance-title">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h4>Leaking Pipe - Kitchen</h4>
+                        </div>
+                        <span class="maintenance-status status-open">Open</span>
+                    </div>
+                    <div class="maintenance-details">
+                        <p><strong>Property:</strong> Apartment 101, Building A</p>
+                        <p><strong>Reported:</strong> 2 days ago</p>
+                        <p><strong>Priority:</strong> <span class="priority-badge high">High</span></p>
+                    </div>
+                    <div class="maintenance-actions">
+                        <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                        <button class="btn-small btn-primary"><i class="fas fa-edit"></i> Assign</button>
+                    </div>
+                </div>
+
+                <div class="maintenance-item priority-medium">
+                    <div class="maintenance-header">
+                        <div class="maintenance-title">
+                            <i class="fas fa-tools"></i>
+                            <h4>Broken Window</h4>
+                        </div>
+                        <span class="maintenance-status status-progress">In Progress</span>
+                    </div>
+                    <div class="maintenance-details">
+                        <p><strong>Property:</strong> House 5, Green Street</p>
+                        <p><strong>Assigned to:</strong> John (Handyman)</p>
+                        <p><strong>Priority:</strong> <span class="priority-badge medium">Medium</span></p>
+                    </div>
+                    <div class="maintenance-actions">
+                        <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                        <button class="btn-small btn-success"><i class="fas fa-check"></i> Complete</button>
+                    </div>
+                </div>
+
+                <div class="maintenance-item priority-low">
+                    <div class="maintenance-header">
+                        <div class="maintenance-title">
+                            <i class="fas fa-paint-roller"></i>
+                            <h4>Paint Touch Up</h4>
+                        </div>
+                        <span class="maintenance-status status-completed">Completed</span>
+                    </div>
+                    <div class="maintenance-details">
+                        <p><strong>Property:</strong> Office 302, Business Center</p>
+                        <p><strong>Completed:</strong> 1 week ago</p>
+                        <p><strong>Cost:</strong> R2,500</p>
+                    </div>
+                    <div class="maintenance-actions">
+                        <button class="btn-small"><i class="fas fa-eye"></i> View</button>
+                        <button class="btn-small"><i class="fas fa-file-invoice"></i> Invoice</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<style>
+.maintenance-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.maintenance-item {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.maintenance-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.maintenance-item.priority-high {
+    border-left: 4px solid #ef4444;
+}
+
+.maintenance-item.priority-medium {
+    border-left: 4px solid #f59e0b;
+}
+
+.maintenance-item.priority-low {
+    border-left: 4px solid #10b981;
+}
+
+.maintenance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.maintenance-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.maintenance-title i {
+    font-size: 20px;
+}
+
+.maintenance-title h4 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+}
+
+.maintenance-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-open {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-progress {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-completed {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.maintenance-details {
+   
+}
+
+.maintenance-details p {
+    margin: 8px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.maintenance-details strong {
+    color: rgba(255, 255, 255, 0.7);
+    min-width: 100px;
+    display: inline-block;
+}
+
+.priority-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.priority-badge.high {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.priority-badge.medium {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.priority-badge.low {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.maintenance-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-small:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn-small.btn-primary {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    border: none;
+}
+
+.btn-small.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+    
+    // Add maintenance button
+    const addMaintenanceBtn = document.getElementById('addMaintenanceBtn');
+    if (addMaintenanceBtn) {
+        addMaintenanceBtn.addEventListener('click', function() {
+            alert('Add maintenance request functionality will be implemented');
+        });
+    }
+});
+</script>
+{% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle sidebar on mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+});
+</script>
+{% endblock %}

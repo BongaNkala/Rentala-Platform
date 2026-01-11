@@ -1,0 +1,227 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Maintenance | Rentala - Property Management{% endblock %}
+
+{% block sidebar %}
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <h2>Rentala</h2>
+                <p>Property Management</p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav-section">
+        <div class="nav-title">Main</div>
+        <a href="{% url 'dashboard:index' %}" class="nav-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="{% url 'properties:index' %}" class="nav-item">
+            <i class="fas fa-building"></i>
+            <span>Properties</span>
+            <span class="nav-badge">8</span>
+        </a>
+        <a href="{% url 'tenants:index' %}" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Tenants</span>
+            <span class="nav-badge">48</span>
+        </a>
+        <a href="{% url 'payments:index' %}" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Payments</span>
+            <span class="nav-badge">R245,600</span>
+        </a>
+        <a href="{% url 'maintenance:index' %}" class="nav-item active">
+            <i class="fas fa-tools"></i>
+            <span>Maintenance</span>
+            <span class="nav-badge">3</span>
+        </a>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-title">Analytics</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-pie"></i>
+            <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-area"></i>
+            <span>Forecasting</span>
+        </a>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-title">Settings</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+        <a href="{% url 'accounts:profile' %}" class="nav-item">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile</span>
+        </a>
+        <a href="{% url 'accounts:logout' %}" class="nav-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-stats">
+            <div class="stat-item">
+                <span class="stat-value">8</span>
+                <span class="stat-label">Properties</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">48</span>
+                <span class="stat-label">Tenants</span>
+            </div>
+        </div>
+        <div class="system-status">
+            <div class="status-indicator online"></div>
+            <span>System Online</span>
+        </div>
+    </div>
+</aside>
+{% endblock %}
+
+{% block content %}
+<header class="top-header">
+    <div class="page-title">
+        <h1>Maintenance Management</h1>
+        <p>Track and manage all maintenance requests and repairs</p>
+    </div>
+    
+    <div class="header-actions">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="date-range">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Active Requests</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">2</span>
+        </button>
+        <div class="top-profile-tab">
+            <div class="top-profile-avatar">BM</div>
+            <div class="top-profile-name">Bonga Mthembu</div>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</header>
+
+<!-- Quick Stats Row -->
+<section class="quick-stats">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="stat-change negative">
+                <i class="fas fa-arrow-up"></i> 25%
+            </div>
+        </div>
+        <div class="stat-value">3</div>
+        <div class="stat-label">Active Requests</div>
+        <div class="stat-trend">
+            <span>+1 new request this week</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 15%
+            </div>
+        </div>
+        <div class="stat-value">12</div>
+        <div class="stat-label">Completed This Month</div>
+        <div class="stat-trend">
+            <span>Avg. completion: 3.2 days</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-change negative">
+                <i class="fas fa-arrow-up"></i> 8%
+            </div>
+        </div>
+        <div class="stat-value">R8,500</div>
+        <div class="stat-label">Monthly Cost</div>
+        <div class="stat-trend">
+            <span>+R650 from last month</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-down"></i> 12%
+            </div>
+        </div>
+        <div class="stat-value">2.8</div>
+        <div class="stat-label">Avg. Response (Days)</div>
+        <div class="stat-trend">
+            <span>Improved by 0.4 days</span>
+        </div>
+    </div>
+</section>
+
+<!-- Maintenance Management Content -->
+<section class="content-placeholder">
+    <h2>Maintenance Management System</h2>
+    <p>This page will display all maintenance requests, repair schedules, and vendor information.</p>
+    <p>
+        <i class="fas fa-check-circle"></i>
+        Maintenance request system ready
+    </p>
+    <p>
+        <i class="fas fa-check-circle"></i>
+        Vendor management configured
+    </p>
+    <p>
+        <i class="fas fa-check-circle"></i>
+        Scheduling system enabled
+    </p>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle sidebar on mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+});
+</script>
+{% endblock %}

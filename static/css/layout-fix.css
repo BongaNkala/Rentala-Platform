@@ -1,0 +1,325 @@
+/* LAYOUT FIX: MARGINS AND PADDINGS */
+
+/* Reset excessive margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fix body overflow */
+body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+    max-width: 100% !important;
+}
+
+/* Dashboard container fixes */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sidebar fixes */
+.sidebar {
+    width: var(--sidebar-width, 280px);
+    min-width: var(--sidebar-width, 280px);
+    max-width: var(--sidebar-width, 280px);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+    margin: 0 !important;
+    padding: 25px 20px !important;
+    overflow-y: auto;
+    border-radius: 0 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 100;
+}
+
+/* Main content area fixes */
+.main-content {
+    flex: 1;
+    min-height: 100vh;
+    padding: 30px 35px !important;
+    margin: 0 !important;
+    overflow-y: auto;
+    width: calc(100vw - var(--sidebar-width, 280px));
+    max-width: calc(100vw - var(--sidebar-width, 280px));
+    position: relative;
+}
+
+/* Top header fixes */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px !important;
+    padding: 0 !important;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Page title fixes */
+.page-title h1 {
+    font-size: 32px;
+    margin: 0 0 8px 0 !important;
+    padding: 0 !important;
+    line-height: 1.2;
+}
+
+.page-title p {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 15px;
+    opacity: 0.9;
+    max-width: 600px;
+}
+
+/* Header actions fixes */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Quick stats grid fixes */
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px !important;
+    padding: 0 !important;
+    width: 100%;
+}
+
+/* Stat card fixes */
+.stat-card {
+    margin: 0 !important;
+    padding: 25px !important;
+    height: auto;
+    min-height: 180px;
+}
+
+/* Charts grid fixes */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px !important;
+    padding: 0 !important;
+    width: 100%;
+}
+
+/* Chart card fixes */
+.chart-card {
+    margin: 0 !important;
+    padding: 25px !important;
+    min-height: 400px;
+}
+
+/* Table fixes */
+.table-card {
+    margin: 0 !important;
+    padding: 25px !important;
+}
+
+.table-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* Form and input fixes */
+input, select, textarea, button {
+    margin: 0 !important;
+    font-family: inherit;
+}
+
+.form-group {
+    margin-bottom: 20px !important;
+}
+
+.form-group:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Button fixes */
+.btn {
+    margin: 0 !important;
+    padding: 12px 24px !important;
+}
+
+/* Modal fixes */
+.modal-content {
+    margin: 20px !important;
+    padding: 0 !important;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+/* Scrollbar fixes */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* Responsive fixes */
+@media (max-width: 1200px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .main-content {
+        padding: 25px 30px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .sidebar.active {
+        left: 0;
+    }
+    
+    .main-content {
+        width: 100vw;
+        max-width: 100vw;
+        padding: 25px !important;
+        padding-top: 80px !important;
+    }
+    
+    .menu-toggle {
+        display: flex !important;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .charts-grid {
+        gap: 15px;
+    }
+    
+    .main-content {
+        padding: 20px !important;
+        padding-top: 70px !important;
+    }
+    
+    .page-title h1 {
+        font-size: 28px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .top-profile-name {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: 15px !important;
+        padding-top: 60px !important;
+    }
+    
+    .stat-card,
+    .chart-card,
+    .table-card {
+        padding: 20px !important;
+    }
+    
+    .page-title h1 {
+        font-size: 24px;
+    }
+    
+    .btn {
+        padding: 10px 20px !important;
+        font-size: 14px;
+    }
+    
+    .header-actions {
+        gap: 8px;
+    }
+}
+
+/* Fix for print */
+@media print {
+    .sidebar {
+        display: none !important;
+    }
+    
+    .main-content {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .top-header,
+    .header-actions {
+        display: none !important;
+    }
+}
+
+/* Ensure no horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Fix for content overflow */
+.content-section {
+    margin: 0 0 25px 0 !important;
+    padding: 0 !important;
+}
+
+.content-section:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Fix for glass panels */
+.glass-panel {
+    margin: 0 !important;
+}

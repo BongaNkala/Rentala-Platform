@@ -1,0 +1,304 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Properties Management | Rentala{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/properties-platform.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="clear-overlay"></div>
+
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="sidebar-logo-text">
+                    <h2>Rentala</h2>
+                    <p>Property Management</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-title">Main</div>
+            <a href="{% url 'dashboard:index' %}" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{% url 'properties:index' %}" class="nav-item active">
+                <i class="fas fa-building"></i>
+                <span>Properties</span>
+                <span class="nav-badge">8</span>
+            </a>
+            <a href="{% url 'tenants:index' %}" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Tenants</span>
+                <span class="nav-badge">48</span>
+            </a>
+            <a href="{% url 'payments:index' %}" class="nav-item">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Payments</span>
+            </a>
+            <a href="{% url 'maintenance:index' %}" class="nav-item">
+                <i class="fas fa-tools"></i>
+                <span>Maintenance</span>
+                <span class="nav-badge">3</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="page-title">
+                <h1>Properties Overview</h1>
+                <p>Manage all your rental properties from one dashboard</p>
+            </div>
+            
+            <div class="header-actions">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search properties...">
+                </div>
+                
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Add Property
+                </button>
+            </div>
+        </header>
+
+        <!-- Property Statistics -->
+        <section class="property-stats">
+            <div class="property-stat-card">
+                <div class="property-stat-header">
+                    <div class="property-stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="property-stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 12.5%
+                    </div>
+                </div>
+                <div class="property-stat-value">8</div>
+                <div class="property-stat-label">Total Properties</div>
+            </div>
+
+            <div class="property-stat-card">
+                <div class="property-stat-header">
+                    <div class="property-stat-icon">
+                        <i class="fas fa-door-open"></i>
+                    </div>
+                    <div class="property-stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 8.2%
+                    </div>
+                </div>
+                <div class="property-stat-value">65</div>
+                <div class="property-stat-label">Total Units</div>
+            </div>
+
+            <div class="property-stat-card">
+                <div class="property-stat-header">
+                    <div class="property-stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="property-stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 15.3%
+                    </div>
+                </div>
+                <div class="property-stat-value">45</div>
+                <div class="property-stat-label">Occupied Units</div>
+            </div>
+
+            <div class="property-stat-card">
+                <div class="property-stat-header">
+                    <div class="property-stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="property-stat-change negative">
+                        <i class="fas fa-arrow-down"></i> 3.1%
+                    </div>
+                </div>
+                <div class="property-stat-value">31%</div>
+                <div class="property-stat-label">Vacancy Rate</div>
+            </div>
+        </section>
+
+        <!-- Properties Grid -->
+        <section class="properties-grid">
+            <!-- Property Card 1 -->
+            <div class="property-card">
+                <div class="property-card-header">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=250&fit=crop" alt="Modern Apartment" class="property-image">
+                    <span class="property-status status-occupied">Occupied</span>
+                </div>
+                <div class="property-card-body">
+                    <div class="property-card-title">
+                        <span>Sunset Apartments</span>
+                        <span class="property-price">R15,000</span>
+                    </div>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Cape Town, Sea Point</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="property-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>3 Bed</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-bath"></i>
+                            <span>2 Bath</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>120m²</span>
+                        </div>
+                    </div>
+                    <div class="property-card-footer">
+                        <div class="property-tenant">
+                            <div class="tenant-avatar">JS</div>
+                            <span class="tenant-name">John Smith</span>
+                        </div>
+                        <div class="property-actions">
+                            <button class="action-btn btn-view">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 2 -->
+            <div class="property-card">
+                <div class="property-card-header">
+                    <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&h=250&fit=crop" alt="Luxury House" class="property-image">
+                    <span class="property-status status-vacant">Vacant</span>
+                </div>
+                <div class="property-card-body">
+                    <div class="property-card-title">
+                        <span>Mountain View House</span>
+                        <span class="property-price">R25,000</span>
+                    </div>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Johannesburg, Sandton</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="property-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>4 Bed</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-bath"></i>
+                            <span>3 Bath</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>220m²</span>
+                        </div>
+                    </div>
+                    <div class="property-card-footer">
+                        <div class="property-actions">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-user-plus"></i>
+                                Add Tenant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 3 -->
+            <div class="property-card">
+                <div class="property-card-header">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop" alt="City Apartment" class="property-image">
+                    <span class="property-status status-maintenance">Maintenance</span>
+                </div>
+                <div class="property-card-body">
+                    <div class="property-card-title">
+                        <span>City Heights Apartments</span>
+                        <span class="property-price">R12,500</span>
+                    </div>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Durban, Umhlanga</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="property-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>2 Bed</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-bath"></i>
+                            <span>1 Bath</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-vector-square"></i>
+                            <span>85m²</span>
+                        </div>
+                    </div>
+                    <div class="property-card-footer">
+                        <div class="property-tenant">
+                            <div class="tenant-avatar">AS</div>
+                            <span class="tenant-name">Alice Johnson</span>
+                        </div>
+                        <div class="property-actions">
+                            <button class="action-btn btn-view">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Management Section -->
+        <section class="property-form-container">
+            <div class="property-form-header">
+                <h3>
+                    <i class="fas fa-plus-circle"></i>
+                    Add New Property
+                </h3>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="propertyName">Property Name</label>
+                    <input type="text" id="propertyName" placeholder="Enter property name">
+                </div>
+                <div class="form-group">
+                    <label for="propertyType">Property Type</label>
+                    <select id="propertyType">
+                        <option value="">Select type</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="house">House</option>
+                        <option value="townhouse">Townhouse</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="propertyAddress">Address</label>
+                    <input type="text" id="propertyAddress" placeholder="Enter full address">
+                </div>
+                <div class="form-group">
+                    <label for="monthlyRent">Monthly Rent (R)</label>
+                    <input type="number" id="monthlyRent" placeholder="Enter monthly rent">
+                </div>
+            </div>
+            <button class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                Save Property
+            </button>
+        </section>
+    </main>
+</div>
+{% endblock %}

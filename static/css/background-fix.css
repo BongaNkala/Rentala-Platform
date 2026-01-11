@@ -1,0 +1,77 @@
+/* PROPER BACKGROUND SIZING */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* Fixed background layer */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('/static/images/rentala_web_background.png') no-repeat center center;
+    background-size: cover; /* Ensures image covers entire area */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Parallax effect */
+    z-index: -1000;
+    will-change: transform; /* Performance optimization */
+}
+
+/* Optional darker overlay for better readability */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: -999;
+    pointer-events: none;
+}
+
+/* Content container */
+body > *:not(::before):not(::after) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure dashboard content is above background */
+.dashboard-container,
+.main-content,
+.sidebar,
+.glass-panel,
+.stat-card {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fix for mobile responsiveness */
+@media (max-width: 768px) {
+    body::before {
+        background-attachment: scroll; /* Better for mobile */
+        background-size: cover;
+    }
+}
+
+/* High-DPI screens optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    body::before {
+        /* Could use a higher resolution version if available */
+        background-image: url('/static/images/rentala_web_background.png');
+    }
+}

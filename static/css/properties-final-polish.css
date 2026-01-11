@@ -1,0 +1,425 @@
+/* PROPERTIES PAGE FINAL POLISH */
+
+/* Enhanced Property Cards */
+.property-card {
+    background: rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(35px) !important;
+    -webkit-backdrop-filter: blur(35px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.property-card:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(67, 97, 238, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+.property-card-header {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.property-card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+    pointer-events: none;
+}
+
+.property-image {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    filter: brightness(0.9) !important;
+}
+
+.property-card:hover .property-image {
+    transform: scale(1.1) !important;
+    filter: brightness(1) !important;
+}
+
+/* Enhanced Status Badges */
+.property-status {
+    padding: 8px 16px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 2px solid transparent !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    z-index: 2 !important;
+    animation: fadeIn 0.5s ease-out !important;
+}
+
+.status-occupied {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.2)) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #ff6b6b !important;
+    text-shadow: 0 2px 4px rgba(239, 68, 68, 0.3) !important;
+}
+
+.status-vacant {
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.3), rgba(34, 197, 94, 0.2)) !important;
+    border-color: rgba(74, 222, 128, 0.4) !important;
+    color: #51cf66 !important;
+    text-shadow: 0 2px 4px rgba(74, 222, 128, 0.3) !important;
+}
+
+.status-maintenance {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.2)) !important;
+    border-color: rgba(245, 158, 11, 0.4) !important;
+    color: #ffd43b !important;
+    text-shadow: 0 2px 4px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Enhanced Property Title */
+.property-card-title {
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    margin-bottom: 12px !important;
+}
+
+.property-price {
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    text-shadow: 0 2px 10px rgba(76, 201, 240, 0.3) !important;
+}
+
+/* Enhanced Location */
+.property-location {
+    font-size: 14px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 15px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.property-location i {
+    color: var(--accent) !important;
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.5) !important;
+    animation: pulse 2s infinite !important;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Enhanced Features */
+.property-features {
+    padding: 20px 0 !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.property-feature {
+    background: rgba(255, 255, 255, 0.05) !important;
+    padding: 10px 15px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.property-feature:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+.property-feature i {
+    font-size: 16px !important;
+    color: var(--primary-light) !important;
+    text-shadow: 0 0 8px rgba(72, 149, 239, 0.4) !important;
+}
+
+/* Enhanced Tenant Avatar */
+.tenant-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    box-shadow: 
+        0 4px 15px rgba(67, 97, 238, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.tenant-avatar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.tenant-avatar:hover::before {
+    transform: translateX(100%);
+}
+
+.tenant-avatar:hover {
+    transform: scale(1.1) rotate(5deg) !important;
+    box-shadow: 
+        0 6px 20px rgba(67, 97, 238, 0.6),
+        inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
+}
+
+.tenant-name {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: white !important;
+}
+
+/* Enhanced Action Buttons */
+.property-actions {
+    gap: 10px !important;
+}
+
+.action-btn {
+    padding: 10px 16px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    backdrop-filter: blur(20px) !important;
+    border: 2px solid transparent !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.action-btn i {
+    font-size: 14px !important;
+}
+
+.btn-view {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(30, 64, 175, 0.15)) !important;
+    border-color: rgba(59, 130, 246, 0.4) !important;
+    color: var(--info) !important;
+}
+
+.btn-view:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(30, 64, 175, 0.3)) !important;
+    border-color: var(--info) !important;
+    color: white !important;
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.15)) !important;
+    border-color: rgba(245, 158, 11, 0.4) !important;
+    color: var(--warning) !important;
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(217, 119, 6, 0.3)) !important;
+    border-color: var(--warning) !important;
+    color: white !important;
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Enhanced Form */
+.property-form-container {
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(40px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.form-group input,
+.form-group select {
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 
+        0 0 0 3px rgba(67, 97, 238, 0.15),
+        0 4px 20px rgba(67, 97, 238, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Enhanced Header */
+.page-title h1 {
+    font-size: 42px !important;
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent) 50%, var(--primary-light) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: gradientShift 8s ease infinite !important;
+    background-size: 200% 200% !important;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.search-box {
+    background: rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(25px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    transition: all 0.3s ease !important;
+}
+
+.search-box:focus-within {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 
+        0 6px 25px rgba(67, 97, 238, 0.2),
+        0 0 0 1px rgba(67, 97, 238, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.property-card {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.property-card:nth-child(1) { animation-delay: 0.1s; }
+.property-card:nth-child(2) { animation-delay: 0.2s; }
+.property-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Hover Effects */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn-primary:hover::after {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 
+        0 10px 30px rgba(67, 97, 238, 0.4),
+        0 0 0 1px rgba(67, 97, 238, 0.2) !important;
+}
+
+/* Loading States */
+.property-stat-card.loading .property-stat-value,
+.property-stat-card.loading .property-stat-label {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1) 25%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0.1) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Responsive Polish */
+@media (max-width: 768px) {
+    .page-title h1 {
+        font-size: 32px !important;
+    }
+    
+    .property-stat-value {
+        font-size: 28px !important;
+    }
+    
+    .property-price {
+        font-size: 20px !important;
+    }
+    
+    .property-card-title {
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .property-features {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .property-feature {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .property-card-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .property-actions {
+        width: 100%;
+        justify-content: center;
+    }
+}

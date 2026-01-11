@@ -1,0 +1,29 @@
+/* Body fix - no background here */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Background container */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('/static/images/rentala_web_background.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Content container */
+.content-container {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+}

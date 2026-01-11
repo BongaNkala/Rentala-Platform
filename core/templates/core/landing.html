@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Rentala - Property Management Platform{% endblock %}
+
+{% block content %}
+<div class="landing-container">
+    <div class="landing-hero">
+        <div class="landing-content">
+            <div class="landing-logo">
+                <i class="fas fa-home"></i>
+                <h1>Rentala</h1>
+            </div>
+            <p class="landing-subtitle">Premium Property Management Platform</p>
+            <p class="landing-description">
+                Manage your properties, tenants, payments, and maintenance all in one beautiful dashboard.
+            </p>
+            <div class="landing-actions">
+                <a href="{% url 'accounts:login' %}" class="btn-landing btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </a>
+                <a href="#" class="btn-landing btn-demo">
+                    <i class="fas fa-play-circle"></i> View Demo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.landing-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: 
+        linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.9)),
+        url('{% static "images/rentala_web_background.png" %}') center/cover fixed;
+}
+
+.landing-hero {
+    text-align: center;
+    max-width: 800px;
+    padding: 40px;
+}
+
+.landing-content {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    padding: 50px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.landing-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.landing-logo i {
+    font-size: 48px;
+    color: #4361ee;
+}
+
+.landing-logo h1 {
+    font-size: 48px;
+    background: linear-gradient(135deg, #ffffff 0%, #4cc9f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+.landing-subtitle {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.landing-description {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.landing-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-landing {
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 200px;
+    justify-content: center;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    border: none;
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.btn-login:hover {
+    background: linear-gradient(135deg, #3a0ca3, #4361ee);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(67, 97, 238, 0.5);
+}
+
+.btn-demo {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+}
+
+.btn-demo:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .landing-content {
+        padding: 30px;
+    }
+    
+    .landing-logo {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .landing-logo h1 {
+        font-size: 36px;
+    }
+    
+    .landing-logo i {
+        font-size: 36px;
+    }
+    
+    .landing-subtitle {
+        font-size: 18px;
+    }
+    
+    .landing-description {
+        font-size: 16px;
+    }
+    
+    .btn-landing {
+        min-width: 180px;
+        padding: 14px 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-content {
+        padding: 20px;
+    }
+    
+    .landing-logo h1 {
+        font-size: 32px;
+    }
+    
+    .landing-actions {
+        flex-direction: column;
+    }
+    
+    .btn-landing {
+        width: 100%;
+    }
+}
+</style>
+{% endblock %}

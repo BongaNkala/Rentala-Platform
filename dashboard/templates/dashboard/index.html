@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard | Rentala{% endblock %}
+
+{% block page_title %}
+<h1>Dashboard Overview</h1>
+<p>Welcome back, {{ user.first_name|default:user.email }}! Here's what's happening with your properties today.</p>
+{% endblock %}
+
+{% block content %}
+<!-- Quick Stats Row -->
+<section class="quick-stats">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 12.5%
+            </div>
+        </div>
+        <div class="stat-value">R{{ monthly_revenue|floatformat:"0" }}</div>
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-trend">
+            <span>+R24,560 from last month</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 8.2%
+            </div>
+        </div>
+        <div class="stat-value">{{ total_properties }}</div>
+        <div class="stat-label">Total Properties</div>
+        <div class="stat-trend">
+            <span>+2 properties this quarter</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 15.3%
+            </div>
+        </div>
+        <div class="stat-value">{{ total_tenants }}</div>
+        <div class="stat-label">Active Tenants</div>
+        <div class="stat-trend">
+            <span>92% occupancy rate</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-change negative">
+                <i class="fas fa-arrow-down"></i> 3.1%
+            </div>
+        </div>
+        <div class="stat-value">{{ pending_issues }}</div>
+        <div class="stat-label">Pending Issues</div>
+        <div class="stat-trend">
+            <span>2 awaiting attention</span>
+        </div>
+    </div>
+</section>
+
+<!-- Properties Section -->
+<section style="margin-top: 40px;">
+    <h2 style="color: white; margin-bottom: 20px; font-size: 24px;">Recent Properties</h2>
+    <div class="quick-stats">
+        <div class="stat-card">
+            <h3 style="color: white; margin-bottom: 15px;">Sunset Villa</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">
+                <i class="fas fa-map-marker-alt"></i> 123 Beach Rd, Cape Town
+            </p>
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; color: white;">12</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7);">Units</div>
+                </div>
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; color: #4ade80;">10</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7);">Occupied</div>
+                </div>
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; color: var(--accent);">R245,600</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7);">Monthly</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <h3 style="color: white; margin-bottom: 15px;">Mountain View</h3>
+            <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">
+                <i class="fas fa-map-marker-alt"></i> 456 Mountain Ave, Johannesburg
+            </p>
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; color: white;">8</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7);">Units</div>
+                </div>
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; color: #4ade80;">8</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7);">Occupied</div>
+                </div>
+                <div>
+                    <div style="font-size: 24px; font-weight: bold; color: var(--accent);">R192,000</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7);">Monthly</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions -->
+<section style="margin-top: 40px;">
+    <h2 style="color: white; margin-bottom: 20px; font-size: 24px;">Quick Actions</h2>
+    <div class="quick-stats">
+        <div class="stat-card" style="text-align: center; cursor: pointer;" onclick="window.location.href='{% url 'properties:create' %}'">
+            <div class="stat-icon" style="margin: 0 auto 20px auto;">
+                <i class="fas fa-plus-circle"></i>
+            </div>
+            <h3 style="color: white; margin-bottom: 10px;">Add Property</h3>
+            <p style="color: rgba(255,255,255,0.7);">Add a new property to your portfolio</p>
+        </div>
+        
+        <div class="stat-card" style="text-align: center; cursor: pointer;" onclick="window.location.href='{% url 'tenants:create' %}'">
+            <div class="stat-icon" style="margin: 0 auto 20px auto;">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <h3 style="color: white; margin-bottom: 10px;">Add Tenant</h3>
+            <p style="color: rgba(255,255,255,0.7);">Register a new tenant</p>
+        </div>
+        
+        <div class="stat-card" style="text-align: center; cursor: pointer;" onclick="window.location.href='{% url 'payments:create' %}'">
+            <div class="stat-icon" style="margin: 0 auto 20px auto;">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <h3 style="color: white; margin-bottom: 10px;">Record Payment</h3>
+            <p style="color: rgba(255,255,255,0.7);">Record a rental payment</p>
+        </div>
+        
+        <div class="stat-card" style="text-align: center; cursor: pointer;" onclick="window.location.href='{% url 'maintenance:create' %}'">
+            <div class="stat-icon" style="margin: 0 auto 20px auto;">
+                <i class="fas fa-tools"></i>
+            </div>
+            <h3 style="color: white; margin-bottom: 10px;">Maintenance</h3>
+            <p style="color: rgba(255,255,255,0.7);">Schedule maintenance</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

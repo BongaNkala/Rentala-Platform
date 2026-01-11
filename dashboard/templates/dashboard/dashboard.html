@@ -1,0 +1,344 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block title %}Dashboard | Rentala - Property Management{% endblock %}
+
+{% block sidebar %}
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <h2>Rentala</h2>
+                <p>Property Management</p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav-section">
+        <div class="nav-title">Main</div>
+        <a href="/dashboard/" class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="/properties/" class="nav-item">
+            <i class="fas fa-building"></i>
+            <span>Properties</span>
+            <span class="nav-badge">8</span>
+        </a>
+        <a href="/tenants/" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Tenants</span>
+            <span class="nav-badge">48</span>
+        </a>
+        <a href="/payments/" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Payments</span>
+            <span class="nav-badge">R245,600</span>
+        </a>
+        <a href="/maintenance/" class="nav-item">
+            <i class="fas fa-tools"></i>
+            <span>Maintenance</span>
+            <span class="nav-badge">3</span>
+        </a>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-title">Analytics</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-pie"></i>
+            <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-area"></i>
+            <span>Forecasting</span>
+        </a>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-title">Settings</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+        <a href="{% url 'accounts:profile' %}" class="nav-item">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile</span>
+        </a>
+        <a href="{% url 'accounts:logout' %}" class="nav-item" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-stats">
+            <div class="stat-item">
+                <span class="stat-value">8</span>
+                <span class="stat-label">Properties</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">48</span>
+                <span class="stat-label">Tenants</span>
+            </div>
+        </div>
+        <div class="system-status">
+            <div class="status-indicator online"></div>
+            <span>System Online</span>
+        </div>
+    </div>
+</aside>
+{% endblock %}
+
+{% block content %}
+<header class="top-header">
+    <div class="page-title">
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back, Bonga! Here's what's happening with your properties today.</p>
+    </div>
+    
+    <div class="header-actions">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="date-range">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Last 30 Days</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">5</span>
+        </button>
+        <div class="top-profile-tab">
+            <div class="top-profile-avatar">BM</div>
+            <div class="top-profile-name">Bonga Mthembu</div>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</header>
+
+<!-- Quick Stats Row -->
+<section class="quick-stats">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 12.5%
+            </div>
+        </div>
+        <div class="stat-value">R245,600</div>
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-trend">
+            <span>+R24,560 from last month</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 8.2%
+            </div>
+        </div>
+        <div class="stat-value">8</div>
+        <div class="stat-label">Total Properties</div>
+        <div class="stat-trend">
+            <span>+2 properties this quarter</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 15.3%
+            </div>
+        </div>
+        <div class="stat-value">48</div>
+        <div class="stat-label">Active Tenants</div>
+        <div class="stat-trend">
+            <span>92% occupancy rate</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-change negative">
+                <i class="fas fa-arrow-down"></i> 3.1%
+            </div>
+        </div>
+        <div class="stat-value">3</div>
+        <div class="stat-label">Pending Issues</div>
+        <div class="stat-trend">
+            <span>2 awaiting attention</span>
+        </div>
+    </div>
+</section>
+
+<!-- Main Charts Row -->
+<section class="charts-grid">
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Revenue Overview</h3>
+            <div class="chart-actions">
+                <select>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>Property Types Distribution</h3>
+            <div class="chart-actions">
+                <select>
+                    <option value="all">All Properties</option>
+                    <option value="active">Active Only</option>
+                </select>
+            </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="propertyTypeChart"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Content Placeholder -->
+<section class="content-placeholder">
+    <h2>✓ Dashboard Successfully Implemented!</h2>
+    <p>Your complete Rentala dashboard design is now running with the background image and glassmorphism effects.</p>
+    <p>All components are styled according to your design system.</p>
+    <p>
+        <i class="fas fa-check-circle"></i>
+        Background image loaded
+    </p>
+    <p>
+        <i class="fas fa-check-circle"></i>
+        Glassmorphism effects active
+    </p>
+    <p>
+        <i class="fas fa-check-circle"></i>
+        Responsive design enabled
+    </p>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle sidebar on mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+    
+    // Initialize Revenue Chart
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    const revenueChart = new Chart(revenueCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Revenue (R)',
+                data: [120000, 190000, 150000, 210000, 180000, 245600],
+                borderColor: '#4361ee',
+                backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'rgba(255, 255, 255, 0.9)'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.7)'
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        callback: function(value) {
+                            return 'R' + value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Initialize Property Type Chart
+    const propertyTypeCtx = document.getElementById('propertyTypeChart').getContext('2d');
+    const propertyTypeChart = new Chart(propertyTypeCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Residential', 'Commercial', 'Mixed Use', 'Vacation'],
+            datasets: [{
+                data: [45, 25, 20, 10],
+                backgroundColor: [
+                    '#4361ee',
+                    '#7209b7',
+                    '#4cc9f0',
+                    '#4895ef'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        padding: 20
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
