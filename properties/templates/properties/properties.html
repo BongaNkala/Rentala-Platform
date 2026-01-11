@@ -1,139 +1,204 @@
 {% extends 'base_dashboard.html' %}
 {% load static %}
 
-{% block title %}Properties Management | Rentala{% endblock %}
+{% block title %}Properties Management | Rentala - Property Management{% endblock %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/properties-platform.css' %}">
+{% block sidebar %}
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <h2>Rentala</h2>
+                <p>Property Management</p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav-section">
+        <div class="nav-title">Main</div>
+        <a href="{% url 'dashboard:index' %}" class="nav-item">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="{% url 'properties:index' %}" class="nav-item">
+            <i class="fas fa-building"></i>
+            <span>Properties</span>
+            <span class="nav-badge">8</span>
+        </a>
+        <a href="{% url 'tenants:index' %}" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Tenants</span>
+            <span class="nav-badge">48</span>
+        </a>
+        <a href="{% url 'payments:index' %}" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Payments</span>
+            <span class="nav-badge">R245,600</span>
+        </a>
+        <a href="{% url 'maintenance:index' %}" class="nav-item active">
+            <i class="fas fa-tools"></i>
+            <span>Maintenance</span>
+            <span class="nav-badge">3</span>
+        </a>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-title">Analytics</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-pie"></i>
+            <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-area"></i>
+            <span>Forecasting</span>
+        </a>
+    </nav>
+
+    <nav class="nav-section">
+        <div class="nav-title">Settings</div>
+        <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+        <a href="{% url 'accounts:profile' %}" class="nav-item">
+            <i class="fas fa-user-cog"></i>
+            <span>Profile</span>
+        </a>
+        <a href="{% url 'accounts:logout' %}" class="nav-item" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="sidebar-stats">
+            <div class="stat-item">
+                <span class="stat-value">8</span>
+                <span class="stat-label">Properties</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">48</span>
+                <span class="stat-label">Tenants</span>
+            </div>
+        </div>
+        <div class="system-status">
+            <div class="status-indicator online"></div>
+            <span>System Online</span>
+        </div>
+    </div>
+</aside>
 {% endblock %}
 
 {% block content %}
-<div class="clear-overlay"></div>
-
-<div class="dashboard-container">
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <div class="sidebar-logo-icon">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="sidebar-logo-text">
-                    <h2>Rentala</h2>
-                    <p>Property Management</p>
-                </div>
+<main class="main-content">
+    <header class="top-header">
+        <div class="page-title">
+            <h1>Properties Overview</h1>
+            <p>Manage your properties from this dashboard</p>
+        </div>
+        
+        <div class="header-actions">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="date-range">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Last 30 Days</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            
+            <button class="notification-btn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">5</span>
+            </button>
+            <div class="top-profile-tab">
+                <div class="top-profile-avatar">BM</div>
+                <div class="top-profile-name">Bonga Mthembu</div>
+                <i class="fas fa-chevron-down"></i>
             </div>
         </div>
+    </header>
 
-        <nav class="nav-section">
-            <div class="nav-title">Main</div>
-            <a href="{% url 'dashboard:index' %}" class="nav-item">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="{% url 'properties:index' %}" class="nav-item active">
-                <i class="fas fa-building"></i>
-                <span>Properties</span>
-                <span class="nav-badge">8</span>
-            </a>
-            <a href="{% url 'tenants:index' %}" class="nav-item">
-                <i class="fas fa-users"></i>
-                <span>Tenants</span>
-                <span class="nav-badge">48</span>
-            </a>
-            <a href="{% url 'payments:index' %}" class="nav-item">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <span>Payments</span>
-            </a>
-            <a href="{% url 'maintenance:index' %}" class="nav-item">
-                <i class="fas fa-tools"></i>
-                <span>Maintenance</span>
-                <span class="nav-badge">3</span>
-            </a>
-        </nav>
-    </aside>
-
-    <main class="main-content">
-        <header class="top-header">
-            <div class="page-title">
-                <h1>Properties Overview</h1>
-                <p>Manage your properties from this dashboard</p>
-            </div>
-        </header>
-
-        <section class="quick-stats">
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="stat-change positive">
-                        <i class="fas fa-arrow-up"></i> 12.5%
-                    </div>
+    <section class="quick-stats">
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-building"></i>
                 </div>
-                <div class="stat-value">8</div>
-                <div class="stat-label">Total Properties</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon">
-                        <i class="fas fa-door-open"></i>
-                    </div>
-                    <div class="stat-change positive">
-                        <i class="fas fa-arrow-up"></i> 8.2%
-                    </div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 12.5%
                 </div>
-                <div class="stat-value">65</div>
-                <div class="stat-label">Total Units</div>
             </div>
+            <div class="stat-value">8</div>
+            <div class="stat-label">Total Properties</div>
+        </div>
 
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-change positive">
-                        <i class="fas fa-arrow-up"></i> 15.3%
-                    </div>
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-door-open"></i>
                 </div>
-                <div class="stat-value">45</div>
-                <div class="stat-label">Occupied Units</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-icon">
-                        <i class="fas fa-percentage"></i>
-                    </div>
-                    <div class="stat-change negative">
-                        <i class="fas fa-arrow-down"></i> 5.2%
-                    </div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 8.2%
                 </div>
-                <div class="stat-value">69%</div>
-                <div class="stat-label">Occupancy Rate</div>
             </div>
-        </section>
+            <div class="stat-value">65</div>
+            <div class="stat-label">Total Units</div>
+        </div>
 
-        <!-- Property Management Content -->
-        <section class="content-placeholder">
-            <h2>Property Management System</h2>
-            <p>This page will display all properties, units, and management tools.</p>
-            <p>
-                <i class="fas fa-check-circle"></i>
-                Property listing system ready
-            </p>
-            <p>
-                <i class="fas fa-check-circle"></i>
-                Unit management configured
-            </p>
-            <p>
-                <i class="fas fa-check-circle"></i>
-                Occupancy tracking enabled
-            </p>
-        </section>
-    </main>
-</div>
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 15.3%
+                </div>
+            </div>
+            <div class="stat-value">45</div>
+            <div class="stat-label">Occupied Units</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="stat-change negative">
+                    <i class="fas fa-arrow-down"></i> 5.2%
+                </div>
+            </div>
+            <div class="stat-value">69%</div>
+            <div class="stat-label">Occupancy Rate</div>
+        </div>
+    </section>
+
+    <!-- Property Management Content -->
+    <section class="content-placeholder">
+        <h2>Property Management System</h2>
+        <p>This page will display all properties, units, and management tools.</p>
+        <p>
+            <i class="fas fa-check-circle"></i>
+            Property listing system ready
+        </p>
+        <p>
+            <i class="fas fa-check-circle"></i>
+            Unit management configured
+        </p>
+        <p>
+            <i class="fas fa-check-circle"></i>
+            Occupancy tracking enabled
+        </p>
+    </section>
+</main>
 {% endblock %}
 
 {% block extra_js %}
