@@ -5,10 +5,11 @@ from django.views.generic import TemplateView
 
 
 @method_decorator(login_required, name='dispatch')
-class IndexView(TemplateView):
+class PropertiesView(TemplateView):
+    """Properties view matching dashboard style"""
     template_name = 'properties/properties.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
+        context['page_title'] = 'Properties'
         return context

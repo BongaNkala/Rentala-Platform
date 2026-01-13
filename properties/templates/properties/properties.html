@@ -1,7 +1,7 @@
 {% extends 'base_dashboard.html' %}
 {% load static %}
 
-{% block title %}Properties Management | Rentala - Property Management{% endblock %}
+{% block title %}Properties | Rentala - Property Management{% endblock %}
 
 {% block sidebar %}
 <aside class="sidebar" id="sidebar">
@@ -23,7 +23,7 @@
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
-        <a href="{% url 'properties:index' %}" class="nav-item">
+        <a href="{% url 'properties:index' %}" class="nav-item active">
             <i class="fas fa-building"></i>
             <span>Properties</span>
             <span class="nav-badge">8</span>
@@ -38,7 +38,7 @@
             <span>Payments</span>
             <span class="nav-badge">R245,600</span>
         </a>
-        <a href="{% url 'maintenance:index' %}" class="nav-item active">
+        <a href="{% url 'maintenance:index' %}" class="nav-item">
             <i class="fas fa-tools"></i>
             <span>Maintenance</span>
             <span class="nav-badge">3</span>
@@ -71,12 +71,12 @@
             <i class="fas fa-user-cog"></i>
             <span>Profile</span>
         </a>
-        <a href="{% url 'accounts:logout' %}" class="nav-item" id="logoutBtn">
+        <a href="{% url 'accounts:logout' %}" class="nav-item">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
     </nav>
-    
+
     <div class="sidebar-footer">
         <div class="sidebar-stats">
             <div class="stat-item">
@@ -97,110 +97,278 @@
 {% endblock %}
 
 {% block content %}
-<main class="main-content">
-    <header class="top-header">
-        <div class="page-title">
-            <h1>Properties Overview</h1>
-            <p>Manage your properties from this dashboard</p>
+<header class="top-header">
+    <div class="page-title">
+        <h1>Property Management</h1>
+        <p>Manage all your rental properties in one place</p>
+    </div>
+
+    <div class="header-actions">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="date-range">
+            <i class="fas fa-calendar-alt"></i>
+            <span>All Properties</span>
+            <i class="fas fa-chevron-down"></i>
         </div>
-        
-        <div class="header-actions">
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+
+        <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </button>
+        <div class="top-profile-tab">
+            <div class="top-profile-avatar">BM</div>
+            <div class="top-profile-name">Bonga Mthembu</div>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</header>
+
+<!-- Quick Stats Row -->
+<section class="quick-stats">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 8.5%
+            </div>
+        </div>
+        <div class="stat-value">24</div>
+        <div class="stat-label">Total Properties</div>
+        <div class="stat-trend">
+            <span>+2 properties this month</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i> 12.3%
+            </div>
+        </div>
+        <div class="stat-value">18</div>
+        <div class="stat-label">Available</div>
+        <div class="stat-trend">
+            <span>75% occupancy rate</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-change negative">
+                <i class="fas fa-arrow-down"></i> 3.2%
+            </div>
+        </div>
+        <div class="stat-value">5</div>
+        <div class="stat-label">Occupied</div>
+        <div class="stat-trend">
+            <span>1 vacancy filled</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="stat-change neutral">
+                <i class="fas fa-minus"></i> 0.0%
+            </div>
+        </div>
+        <div class="stat-value">1</div>
+        <div class="stat-label">Under Maintenance</div>
+        <div class="stat-trend">
+            <span>No change</span>
+        </div>
+    </div>
+</section>
+
+<!-- Properties Management Content -->
+<section class="content-placeholder">
+    <div class="content-header">
+        <h2>Properties Management System</h2>
+        <div class="content-actions">
+            <button class="action-btn primary">
+                <i class="fas fa-plus"></i> Add New Property
             </button>
-            
-            <div class="date-range">
-                <i class="fas fa-calendar-alt"></i>
-                <span>Last 30 Days</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            
-            <button class="notification-btn">
-                <i class="fas fa-bell"></i>
-                <span class="notification-badge">5</span>
-            </button>
-            <div class="top-profile-tab">
-                <div class="top-profile-avatar">BM</div>
-                <div class="top-profile-name">Bonga Mthembu</div>
-                <i class="fas fa-chevron-down"></i>
+            <div class="filter-dropdown">
+                <button class="action-btn secondary">
+                    <i class="fas fa-filter"></i> Filter Properties
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="filter-options">
+                    <a href="#" class="filter-option">All Properties</a>
+                    <a href="#" class="filter-option">Available Only</a>
+                    <a href="#" class="filter-option">Occupied Only</a>
+                    <div class="filter-divider"></div>
+                    <a href="#" class="filter-option">By Property Type</a>
+                </div>
             </div>
         </div>
-    </header>
+    </div>
 
-    <section class="quick-stats">
-        <div class="stat-card">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <i class="fas fa-building"></i>
+    <div class="properties-grid">
+        <div class="property-card">
+            <div class="property-header">
+                <div class="property-type">House</div>
+                <div class="property-status available">Available</div>
+            </div>
+            <div class="property-image" style="background-image: url('{% static 'img/property1.jpg' %}')"></div>
+            <div class="property-info">
+                <h3>Klerksdorp</h3>
+                <p class="property-location">
+                    <i class="fas fa-map-marker-alt"></i> Matlosana Estate, Freemansville
+                </p>
+                <div class="property-details">
+                    <span><i class="fas fa-bed"></i> 3 Beds</span>
+                    <span><i class="fas fa-bath"></i> 2 Baths</span>
+                    <span><i class="fas fa-ruler-combined"></i> 83 sqm</span>
                 </div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i> 12.5%
+                <div class="property-price">
+                    <strong>R6,500</strong> / month
                 </div>
             </div>
-            <div class="stat-value">8</div>
-            <div class="stat-label">Total Properties</div>
+            <div class="property-actions">
+                <button class="btn-action view"><i class="fas fa-eye"></i></button>
+                <button class="btn-action edit"><i class="fas fa-edit"></i></button>
+                <button class="btn-action delete"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <i class="fas fa-door-open"></i>
+        <div class="property-card">
+            <div class="property-header">
+                <div class="property-type">House</div>
+                <div class="property-status occupied">Occupied</div>
+            </div>
+            <div class="property-image" style="background-image: url('{% static 'img/property2.jpg' %}')"></div>
+            <div class="property-info">
+                <h3>Klerksdorp</h3>
+                <p class="property-location">
+                    <i class="fas fa-map-marker-alt"></i> Matlosana Estate, Freemansville
+                </p>
+                <div class="property-details">
+                    <span><i class="fas fa-bed"></i> 3 Beds</span>
+                    <span><i class="fas fa-bath"></i> 2 Baths</span>
+                    <span><i class="fas fa-ruler-combined"></i> 83 sqm</span>
                 </div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i> 8.2%
+                <div class="property-price">
+                    <strong>R6,500</strong> / month
                 </div>
             </div>
-            <div class="stat-value">65</div>
-            <div class="stat-label">Total Units</div>
+            <div class="property-actions">
+                <button class="btn-action view"><i class="fas fa-eye"></i></button>
+                <button class="btn-action edit"><i class="fas fa-edit"></i></button>
+                <button class="btn-action maintenance"><i class="fas fa-tools"></i></button>
+            </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <i class="fas fa-check-circle"></i>
+        <div class="property-card">
+            <div class="property-header">
+                <div class="property-type">House</div>
+                <div class="property-status unavailable">Unavailable</div>
+            </div>
+            <div class="property-image" style="background-image: url('{% static 'img/property3.jpg' %}')"></div>
+            <div class="property-info">
+                <h3>Klerksdorp</h3>
+                <p class="property-location">
+                    <i class="fas fa-map-marker-alt"></i> Matlosana Estate, Freemansville
+                </p>
+                <div class="property-details">
+                    <span><i class="fas fa-bed"></i> 2 Beds</span>
+                    <span><i class="fas fa-bath"></i> 1 Bath</span>
+                    <span><i class="fas fa-ruler-combined"></i> 63 sqm</span>
                 </div>
-                <div class="stat-change positive">
-                    <i class="fas fa-arrow-up"></i> 15.3%
+                <div class="property-price">
+                    <strong>R5,500</strong> / month
                 </div>
             </div>
-            <div class="stat-value">45</div>
-            <div class="stat-label">Occupied Units</div>
+            <div class="property-actions">
+                <button class="btn-action view"><i class="fas fa-eye"></i></button>
+                <button class="btn-action activate"><i class="fas fa-power-off"></i></button>
+            </div>
         </div>
 
-        <div class="stat-card">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <i class="fas fa-percentage"></i>
+        <div class="property-card">
+            <div class="property-header">
+                <div class="property-type">House</div>
+                <div class="property-status maintenance">Maintenance</div>
+            </div>
+            <div class="property-image" style="background-image: url('{% static 'img/property4.jpg' %}')"></div>
+            <div class="property-info">
+                <h3>Klerksdorp</h3>
+                <p class="property-location">
+                    <i class="fas fa-map-marker-alt"></i> Matlosana Estate, Freemansville
+                </p>
+                <div class="property-details">
+                    <span><i class="fas fa-bed"></i> 3 Beds</span>
+                    <span><i class="fas fa-bath"></i> 2 Baths</span>
+                    <span><i class="fas fa-ruler-combined"></i> 83 sqm</span>
                 </div>
-                <div class="stat-change negative">
-                    <i class="fas fa-arrow-down"></i> 5.2%
+                <div class="property-price">
+                    <strong>R6,500</strong> / month
                 </div>
             </div>
-            <div class="stat-value">69%</div>
-            <div class="stat-label">Occupancy Rate</div>
+            <div class="property-actions">
+                <button class="btn-action view"><i class="fas fa-eye"></i></button>
+                <button class="btn-action edit"><i class="fas fa-edit"></i></button>
+                <button class="btn-action maintenance"><i class="fas fa-tools"></i></button>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Property Management Content -->
-    <section class="content-placeholder">
-        <h2>Property Management System</h2>
-        <p>This page will display all properties, units, and management tools.</p>
+    <div class="content-footer">
         <p>
             <i class="fas fa-check-circle"></i>
-            Property listing system ready
+            Property database integration ready
         </p>
         <p>
             <i class="fas fa-check-circle"></i>
-            Unit management configured
+            Tenant assignment system configured
         </p>
         <p>
             <i class="fas fa-check-circle"></i>
-            Occupancy tracking enabled
+            Maintenance tracking enabled
         </p>
-    </section>
-</main>
-{% endblock %}
+    </div>
+</section>
 
-{% block extra_js %}
-    <script src="{% static 'js/properties-interactive.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle sidebar on mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+        });
+    }
+
+    // Filter dropdown functionality
+    const filterBtn = document.querySelector('.action-btn.secondary');
+    const filterOptions = document.querySelector('.filter-options');
+
+    if (filterBtn && filterOptions) {
+        filterBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            filterOptions.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            filterOptions.classList.remove('show');
+        });
+    }
+});
+</script>
 {% endblock %}
